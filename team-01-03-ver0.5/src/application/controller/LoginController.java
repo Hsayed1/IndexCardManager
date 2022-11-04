@@ -13,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
@@ -22,18 +22,18 @@ import javafx.scene.control.TextField;
 
 public class LoginController implements Initializable {
 	
-	@FXML BorderPane loginScene;
-	@FXML Button loginBtn;
-	@FXML Button homeBtn;
-	@FXML PasswordField passwordField;
-	@FXML Label errorLabel;
-	@FXML TextField emailField;
-	@FXML Label alertEmail;
-	@FXML Label alertPass;
+	@FXML private BorderPane loginScene;
+	@FXML private Button loginBtn;
+	@FXML private Button homeBtn;
+	@FXML private PasswordField passwordField;
+	@FXML private Label errorLabel;
+	@FXML private TextField emailField;
+	@FXML private Label alertEmail;
+	@FXML private Label alertPass;
+	@FXML private Button resetPasswordBtn;
 
 	
-	@FXML 
-	public void userHome(ActionEvent event) {
+	@FXML public void userHome(ActionEvent event) {
 		
 		// Changes the scene from login to home
 		URL url = getClass().getClassLoader().getResource("fxml/Home.fxml");
@@ -93,16 +93,62 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	@FXML 
-	public void changeHomeBtnColor(MouseEvent event) {
+	/*
+	 * When the mouse cursor enters the Home button, it
+	 * changes color.
+	 * 
+	 */
+	@FXML public void changeHomeBtnColor() {
 		homeBtn.setStyle("-fx-background-color: lime;");
 	}
 
-	@FXML 
-	public void revertHomeBtnColor(MouseEvent event) {
+	/*
+	 * When the mouse cursor exits the Home button, it
+	 * reverts back to its original color.
+	 * 
+	 */
+	@FXML public void revertHomeBtnColor() {
 		homeBtn.setStyle("-fx-background-color: white;");
 	}
 
+	/*
+	 * Goes to the reset password route
+	 * 
+	 */
+	@FXML public void goToResetPass(ActionEvent event) {
+		this.changeScene(event, "fxml/enteremail.fxml");
+	}
+
+	/*
+	 * When the mouse cursor exits the reset password
+	 * label, it changes color.
+	 * 
+	 */
+	@FXML public void changeResetPassColor() {
+		resetPasswordBtn.setTextFill(Color.valueOf("#9f8a92"));
+		resetPasswordBtn.setStyle("-fx-background-color: transparent");
+	}
+
+	/*
+	 * When the mouse cursor exits the reset password
+	 * label, it reverts back to its original color.
+	 * 
+	 */
+	@FXML public void revertResetPassColor() {
+		resetPasswordBtn.setTextFill(Color.valueOf("#60756d"));
+		resetPasswordBtn.setStyle("-fx-background-color: transparent");
+	}
+	
+	// Changes color of button
+	@FXML public void changeLoginBtnColor() {
+		loginBtn.setStyle("-fx-background-color: #9f8a92");
+	}
+
+	// Reverts color of button
+	@FXML public void revertLoginBtnColor() {
+		loginBtn.setStyle("-fx-background-color: #60756d");
+	}
+	
 	/*
 	 * Changes the scene from one scene to another
 	 * 
@@ -136,4 +182,5 @@ public class LoginController implements Initializable {
 	private static void sop(Object obj) {
 		System.out.println(obj);
 	}
+
 }

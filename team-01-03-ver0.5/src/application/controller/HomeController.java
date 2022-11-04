@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 
 public class HomeController {
 	
-	@FXML BorderPane homeScene;
-	@FXML Button signupBtn;
-	@FXML Button loginBtn;
+	@FXML private BorderPane homeScene;
+	@FXML private Button signupBtn;
+	@FXML private Button loginBtn;
 	
 	/*
 	 * Go to Signup window
