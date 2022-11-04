@@ -3,11 +3,8 @@ package application;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+//import java.util.List;
 
-import application.personalIndexCardManager.SQLConnector;
 import application.personalIndexCardManager.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +23,7 @@ public class Main extends Application {
     
     
     // temporary storage
-    private static List<User> users;
+    //private static List<User> users;
     
     @Override
     public void start(Stage primaryStage) {
@@ -64,6 +61,7 @@ public class Main extends Application {
 			
 			pane = FXMLLoader.load(getClass().getClassLoader().getResource(fxml));
 			stg.getScene().setRoot(pane);
+			stg.sizeToScene();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
