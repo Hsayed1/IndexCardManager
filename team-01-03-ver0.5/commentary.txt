@@ -1,3 +1,4 @@
-I have combined the code in the repository and my current code
+I have combined the code in the repository and my current code.
+I have added a txt-based database as temporary.
 - Jonathan Chu
 
