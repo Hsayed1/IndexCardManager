@@ -39,7 +39,7 @@ public class securityquestionController implements Initializable
 			Stage stage2 = (Stage)submitAnswerBtn.getScene().getWindow();
 			stage2.close();
 			Stage primaryStage2 = new Stage();
-			Parent root2 = FXMLLoader.load(getClass().getResource("newpassword.fxml"));
+			Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/newpassword.fxml"));
 			
 			primaryStage2.setTitle("New password");
 			primaryStage2.setScene(new Scene(root2, 600, 400));
