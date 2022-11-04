@@ -15,7 +15,7 @@
       </AnchorPane>
       <AnchorPane layoutX="6.0" layoutY="50.0" prefHeight="388.0" prefWidth="611.0">
          <children>
-            <Text layoutX="149.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signup successful" textAlignment="CENTER" wrappingWidth="313.21630859375">
+            <Text layoutX="149.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It has been a success!" textAlignment="CENTER" wrappingWidth="313.21630859375">
                <font>
                   <Font size="56.0" />
                </font>
