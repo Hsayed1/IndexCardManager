@@ -1,7 +1,0 @@
-I combined what was added in the repository and my code
-- Jonathan
-
-Notes:
-- added login screen
-- added home screen
-- added controllers
