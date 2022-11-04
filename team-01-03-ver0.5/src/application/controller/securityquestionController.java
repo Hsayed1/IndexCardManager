@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
@@ -35,14 +36,17 @@ public class securityquestionController implements Initializable
 		boolean passed = true;
 		if(passed = true)
 		{
+			// Goes to reset password scene
 			wrongAnswerError.setVisible(false);
 			Stage stage2 = (Stage)submitAnswerBtn.getScene().getWindow();
 			stage2.close();
 			Stage primaryStage2 = new Stage();
 			Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/newpassword.fxml"));
 			
+			// Settings for the scene
 			primaryStage2.setTitle("New password");
-			primaryStage2.setScene(new Scene(root2, 600, 400));
+			primaryStage2.setScene(new Scene(root2, 500, 300));
+			primaryStage2.initModality(Modality.APPLICATION_MODAL);
 			primaryStage2.show();
 			
 			

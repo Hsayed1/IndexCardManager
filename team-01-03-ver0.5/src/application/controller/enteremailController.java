@@ -3,6 +3,9 @@ package application.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,9 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 
 public class enteremailController implements Initializable
 {
@@ -42,12 +47,21 @@ public class enteremailController implements Initializable
 		{
 			noEmailFoundError.setVisible(false);
 			
+			
+			// Creates security question prompt
 			Stage stage = (Stage)submitBtn.getScene().getWindow();
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/securityquestion.fxml"));
 			
+			// Settings for the security question prompt
 			primaryStage.setTitle("Security Question");
-			primaryStage.setScene(new Scene(root, 600, 400));
+			primaryStage.setScene(new Scene(root, 500, 300));
+			primaryStage.alwaysOnTopProperty();
+			primaryStage.centerOnScreen();
+			primaryStage.setResizable(false);
+			primaryStage.initModality(Modality.APPLICATION_MODAL); // Does not allow the main window from being
+																   // from being accessed until the prompt has 
+																   // been exited or goes back to main window
 			primaryStage.show();
 			
 		}
