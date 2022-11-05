@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 //import java.util.List;
 
+import application.personalIndexCardManager.SQLConnector;
 import application.personalIndexCardManager.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +42,8 @@ public class Main extends Application {
     
     // add user to list
     public void addUser(User user) {
+    	SQLConnector con = new SQLConnector();
+    	con.addUser("usersTest.db", "Users", user);
     	String fileName = "resources/database/users.txt";
     	try  {
     		FileWriter fw = new FileWriter(fileName, true);
