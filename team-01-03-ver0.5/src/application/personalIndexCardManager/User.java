@@ -16,6 +16,22 @@ public class User {
 		this.securityAns = securityAns;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public String getSecurityQuest() {
+		return securityQuest;
+	}
+
+	public String getSecurityAns() {
+		return securityAns;
+	}
+	
 	@Override
 	public String toString() {
 		String userInfo = email + "," + pass + "," + securityQuest + "," + securityAns;
