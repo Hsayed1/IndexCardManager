@@ -166,13 +166,11 @@ public class SQLConnector {
     	String sql = "SELECT email, securityQuest FROM " + table + " WHERE email = ?";
     	
     	// Establishes a connection to the database and creates a statement
-    	//
     	try (Connection con = this.connect(database);
                 PreparedStatement statement  = con.prepareStatement(sql)) {
     		
-    		// Gets the user with the desired password
+    		// Gets the user
     		statement.setString(1, email);
-    		
     		
     		// Check if user is found in the database
     		ResultSet rs  = statement.executeQuery();
@@ -194,13 +192,15 @@ public class SQLConnector {
     public static void main(String[] args) {
     	 SQLConnector app = new SQLConnector();
     	 
-    	 User user = new User("example12324@email.com","password1","What is your favorite video game","Shulk");
+    	 //User user = new User("example12324@email.com","password1","What is your favorite video game","Shulk");
     	 
          //app.addUser("usersTest.db","Users",user);
          app.getAllUsers("usersTest.db", "Users");
          System.out.println();
          System.out.println(app.findEmail("usersTest.db", "Users", "example12324@email.com"));
+         System.out.println();
          System.out.println(app.findPass("usersTest.db", "Users", "example12324@email.com","password1"));
+         System.out.println();
          System.out.println(app.getSecQuest("usersTest.db", "Users", "example12324@email.com"));
     }
 }
