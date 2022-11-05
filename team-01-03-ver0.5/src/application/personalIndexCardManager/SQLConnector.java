@@ -3,7 +3,9 @@ package application.personalIndexCardManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SQLConnector {
 	
@@ -58,12 +60,109 @@ public class SQLConnector {
         }
     }
     
+    /*
+     * Check database for the specified user
+     * 
+     */
+    public void getAllUsers(String database, String table) {
+    	
+    	// PreparedStatement where it pulls data from the database
+    	String sql = "SELECT email, password, securityQuest, securityAns FROM " + table;
+    	try (Connection conn = this.connect(database);
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)){
+                
+               // loop through the result set
+               while (rs.next()) {
+                   System.out.println(rs.getString("email") +  "\t" + 
+                                       rs.getString("password") + "\t" +
+                                       rs.getString("securityQuest") + "\t" +
+                                       rs.getString("securityAns"));
+               }
+               
+           } catch (SQLException e) {
+               e.getStackTrace();
+           }
+    }
+    
+    /*
+     * Find the specified user in the database by email
+     * 
+     */
+    public boolean findEmail(String database, String table, String email) {
+    	
+    	// PreparedStatement where it pulls a piece of data that matches
+    	// with the desired username from teh database
+    	String sql = "SELECT email FROM " + table + " WHERE email = ?";
+    	
+    	// Establishes a connection to the database and creates a statement
+    	//
+    	try (Connection con = this.connect(database);
+                PreparedStatement statement  = con.prepareStatement(sql)) {
+    		
+    		// Gets the user with the desired email
+    		statement.setString(1, email);
+    		
+    		
+    		// Check if user is found in the database
+    		ResultSet rs  = statement.executeQuery();
+    		if (rs.next()) {
+                System.out.println(rs.getString("email"));
+                return true;
+            }
+    		return false;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		
+    	}
+    	return false;
+    }
+    
+    /*
+     * Find the specified user in the database by email
+     * 
+     */
+    public boolean findPass(String database, String table, String email, String password) {
+    	
+    	// PreparedStatement where it pulls a piece of data that matches
+    	// with the desired username from teh database
+    	String sql = "SELECT email, password FROM " + table + " WHERE email = ? and password = ?";
+    	
+    	// Establishes a connection to the database and creates a statement
+    	//
+    	try (Connection con = this.connect(database);
+                PreparedStatement statement  = con.prepareStatement(sql)) {
+    		
+    		// Gets the user with the desired password
+    		statement.setString(1, email);
+    		statement.setString(2, password);
+    		
+    		
+    		// Check if user is found in the database
+    		ResultSet rs  = statement.executeQuery();
+    		if (rs.next()) {
+                System.out.println(rs.getString("email") + "\t" +
+                		rs.getString("password"));
+                return true;
+            }
+    		return false;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		
+    	}
+    	return false;
+    }
+    
     // Tests using dummy database
     public static void main(String[] args) {
     	 SQLConnector app = new SQLConnector();
     	 
     	 User user = new User("example12324@email.com","password1","What is your favorite video game","Shulk");
     	 
-         app.addUser("usersTest.db","Users",user);
+         //app.addUser("usersTest.db","Users",user);
+         app.getAllUsers("usersTest.db", "Users");
+         System.out.println();
+         System.out.println(app.findEmail("usersTest.db", "Users", "example12324@email.com"));
+         System.out.println(app.findPass("usersTest.db", "Users", "example12324@email.com","password1"));
     }
 }
