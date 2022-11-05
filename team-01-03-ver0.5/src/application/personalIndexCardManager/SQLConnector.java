@@ -121,6 +121,8 @@ public class SQLConnector {
     /*
      * Find the specified user in the database by email
      * 
+     * Tables: Users
+     * 
      */
     public boolean findPass(String database, String table, String email, String password) {
     	
@@ -146,11 +148,46 @@ public class SQLConnector {
                 return true;
             }
     		return false;
+    		
     	} catch (SQLException e) {
     		e.printStackTrace();
     		
     	}
     	return false;
+    }
+    
+    /*
+     * Find the specified user in the database by email
+     * 
+     */
+    public String getSecQuest(String database, String table, String email) {
+    	
+    	// PreparedStatement where it pulls a piece of data that matches
+    	String sql = "SELECT email, securityQuest FROM " + table + " WHERE email = ?";
+    	
+    	// Establishes a connection to the database and creates a statement
+    	//
+    	try (Connection con = this.connect(database);
+                PreparedStatement statement  = con.prepareStatement(sql)) {
+    		
+    		// Gets the user with the desired password
+    		statement.setString(1, email);
+    		
+    		
+    		// Check if user is found in the database
+    		ResultSet rs  = statement.executeQuery();
+    		if (rs.next()) {
+                System.out.println(rs.getString("email") + "\t" +
+                		rs.getString("securityQuest"));
+                return rs.getString("SecurityQuest");
+            }
+    		return null;
+    		
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		
+    	}
+    	return null;
     }
     
     // Tests using dummy database
@@ -164,5 +201,6 @@ public class SQLConnector {
          System.out.println();
          System.out.println(app.findEmail("usersTest.db", "Users", "example12324@email.com"));
          System.out.println(app.findPass("usersTest.db", "Users", "example12324@email.com","password1"));
+         System.out.println(app.getSecQuest("usersTest.db", "Users", "example12324@email.com"));
     }
 }
